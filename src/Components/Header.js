@@ -5,7 +5,7 @@ function Header() {
   return (
 	  <Container>
 		  <h1>
-			Todo-List
+			Todo-App
 		  </h1>
 	</Container>
   )
