@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { v4 as uuidv4 } from "uuid"
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-function Todo({ inputTodos, setInputTodos, displayTodos, setDisplayTodos, editTodo, setEditTodo}) {	
+function Todo({ inputTodos, setInputTodos, displayTodos, setDisplayTodos, editTodo, setEditTodo }) {	
+	const textInputRef = useRef(null)
 	const updateTodo = (title, id, completed) => {
 		const newTodo = displayTodos.map(todo => 
 			todo.id === id ? { title, id, completed } : todo
@@ -17,7 +18,9 @@ function Todo({ inputTodos, setInputTodos, displayTodos, setDisplayTodos, editTo
 		} else {
 			setInputTodos("")
 		}
-	}, [setInputTodos, editTodo]);
+		//Input is focused when the DOM is rendered.
+		textInputRef.current.focus()
+	}, [setInputTodos, editTodo, textInputRef]);
 
 	const addTodos = (e) => {
 		e.preventDefault();
@@ -42,7 +45,7 @@ function Todo({ inputTodos, setInputTodos, displayTodos, setDisplayTodos, editTo
 	<>
 		<InputValue>
 			<form>
-			<input onChange={handleInput} value={inputTodos} type="text" placeholder='Write a new task...' />
+			<input ref={textInputRef} onChange={handleInput} value={inputTodos} type="text" placeholder='Write a new task...' />
 			<button onClick={addTodos} type='submit'></button>
 			</form>
 		</InputValue>
@@ -53,6 +56,9 @@ function Todo({ inputTodos, setInputTodos, displayTodos, setDisplayTodos, editTo
 
 
 const InputValue = styled.div`
+	max-width: 450px;
+	width: 100%;
+
 	input {
 		background-color: rgba(0, 0, 0, 0.09);
 		padding: 18px;
@@ -60,7 +66,6 @@ const InputValue = styled.div`
 		outline: none;
 		border: none;
 		border-radius: 18px;
-		min-width: 450px; 
 		width: 100%;
 		font-size: 18px;
 		line-height: 1.5;

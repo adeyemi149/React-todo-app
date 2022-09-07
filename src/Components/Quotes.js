@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {Suspense, useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {motion} from "framer-motion"
 
@@ -9,19 +9,19 @@ function Quotes() {
 		const fetchQuotes = async () => {
 			await fetch('https://api.quotable.io/random?tags=technology,famous-quotes')
 			.then(resp => resp.json())
-				.then(respdata => setQuotes(respdata.content))
+			.then(respdata => setQuotes(respdata.content))
 			.catch(err => console.log(err))
 		}
 
 		fetchQuotes()
 	}, [])
 
-	const trim = (word) => {
-		let length = 100;
-		let trimmedString = word.length > length ? word.substring(0, length - 3) + ".." : word;
-		trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(".")));
-		return trimmedString;
-	}
+	// const trim = (word) => {
+	// 	let length = 100;
+	// 	let trimmedString = word.length > length ? word.substring(0, length - 3) + ".." : word;
+	// 	trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(".")));
+	// 	return trimmedString;
+	// }
 
   return (
 	  <Container
@@ -40,11 +40,7 @@ export default Quotes
 const Container = styled(motion.div)`
 	text-align: center;
 	margin-bottom: 15px;
-	width: 340px;
-	overflow: hidden;
-
-	p {
-		width: 100%;
-		text-align: center;
-	}
+	max-width: 340px;
+	width: 100%;
+	line-height: 1.5;
 `

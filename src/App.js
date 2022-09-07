@@ -47,7 +47,13 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 80px;
-
+  max-width: 500px;
+  width: 100%;
+  flex-wrap: wrap;
+  overflow-y: visible;
+  @media screen and (max-width: 768px) {
+    margin-top: 10px;
+  }
 `
 
 const TodoContainer = styled.div`
@@ -61,6 +67,17 @@ const TodoContainer = styled.div`
 	backdrop-filter: blur(10px);
   padding: 15px;
   border-radius: 15px;
+  width: 100%; 
+  box-sizing: border-box;
+   
+  @media screen and (max-width: 768px) {
+    min-width: 290px;
+    width: 100%
+  }
+  @media screen and (min-width: 768px) {
+    min-width: 550px;
+    width: 100%
+  }
 `
 
 

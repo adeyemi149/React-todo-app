@@ -24,6 +24,7 @@ function Todolist({ displayTodos, setDisplayTodos, setEditTodo }) {
 	}
   return (
 	  <Container>
+		
 		<InputList>
 			{displayTodos.map((todo) => (	  
 			<List key={todo.id}>
@@ -41,17 +42,16 @@ function Todolist({ displayTodos, setDisplayTodos, setEditTodo }) {
 const style = {fontSize: "1.5rem", paddingRight: "10px", cursor: "pointer"}
 
 const Container = styled.div`
-	min-width: 450px;
+	max-width: 450px;
 	width: 100%;
+	box-sizing: border-box;
 `
 
 const InputList = styled.div`
 	padding: 0;
 	margin-top: 15px;
 	width: 100%;
-	min-width: 350px;
 	overflow: hidden;
-	box-sizing: border-box;
 `
 
 const List = styled.div`
@@ -62,6 +62,7 @@ const List = styled.div`
 	background-color: white;
 	border-radius: 18px;
 	width: 100%;
+	box-sizing: border-box;
 
 	animation-name: slide-in-top;
 	animation-duration: .4s;

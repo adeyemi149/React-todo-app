@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 function Header() {
   return (
-	  <Container>
-		  <h1>
+	<Container>
+		<h1>
 			Todo-App
-		  </h1>
+		</h1>
 	</Container>
   )
 }
@@ -18,8 +18,11 @@ const Container = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 15px;
+	width: 100%;
+	text-align: center;
 
 	h1 {
+		width: 100%;
 		font-size: 50px;
 		background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,110,1) 47%, rgba(0,212,255,1) 100%);
 		color: whitesmoke;
