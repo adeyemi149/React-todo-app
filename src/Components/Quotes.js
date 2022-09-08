@@ -12,8 +12,8 @@ function Quotes() {
 			.then(respdata => setQuotes(respdata.content))
 			.catch(err => console.log(err))
 		}  
-
-		fetchQuotes()
+		const request = setTimeout(() => { fetchQuotes() }, 1000)
+		return () => clearTimeout(request)
 	}, [setQuotes])
 
 	// const trim = (word) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy } from "react";
+import React, { useState, useEffect } from "react";
 import Todo from "./Components/Todo";
 import styled from "styled-components";
 import Todolist from "./Components/Todolist";
