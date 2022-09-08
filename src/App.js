@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import Todo from "./Components/Todo";
-import Quotes from "./Components/Quotes";
 import styled from "styled-components";
 import Todolist from "./Components/Todolist";
 import Header from "./Components/Header";
+import Quotes from "./Components/Quotes"
+import LazyLoad from "react-lazy-load";
 
 function App() {
   const initialState = JSON.parse(localStorage.getItem("displayTodos")) || [];
@@ -18,8 +19,10 @@ function App() {
   return (
     <Container>
         <Header />
-        <TodoContainer>
+      <TodoContainer>
+        <LazyLoad height={140}>
         <Quotes />
+        </LazyLoad>
         <Todo
         inputTodos={inputTodos}
         setInputTodos={setInputTodos}

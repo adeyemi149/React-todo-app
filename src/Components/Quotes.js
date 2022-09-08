@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
-import {motion} from "framer-motion"
+import { motion } from "framer-motion"
 
 function Quotes() {
 	const [quotes, setQuotes] = useState("")
@@ -11,10 +11,10 @@ function Quotes() {
 			.then(resp => resp.json())
 			.then(respdata => setQuotes(respdata.content))
 			.catch(err => console.log(err))
-		}
+		}  
 
 		fetchQuotes()
-	}, [])
+	}, [setQuotes])
 
 	// const trim = (word) => {
 	// 	let length = 100;
@@ -25,12 +25,13 @@ function Quotes() {
 
   return (
 	  <Container
-		animate={{scale: 1 }}
-		initial={{ scale: 0 }}
-		transition= {{ delay: .9 }}
+		// animate={{scale: 1 }}
+		// initial={{ scale: 0 }}
+		// transition= {{ delay: .9 }}
 	  >
 		  <h4>Quote of the day</h4>
-		  <p>{quotes}</p>
+		  <div>{quotes ? quotes : <img src='./images/Spin.svg' />}</div>
+		  
 	</Container>
   )
 }
@@ -43,4 +44,9 @@ const Container = styled(motion.div)`
 	max-width: 340px;
 	width: 100%;
 	line-height: 1.5;
+
+	img {
+		width: 30px;
+		padding-top: 30px;
+	}
 `
