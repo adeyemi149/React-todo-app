@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import { motion } from "framer-motion"
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Quotes() {
 	const [quotes, setQuotes] = useState("")
@@ -30,7 +31,7 @@ function Quotes() {
 		// transition= {{ delay: .9 }}
 	  >
 		  <h4>Quote of the day</h4>
-		  <div>{quotes ? quotes : <img src='./images/Spin.svg' />}</div>
+		  <div>{quotes ? quotes : <CircularProgress />}</div>
 		  
 	</Container>
   )
