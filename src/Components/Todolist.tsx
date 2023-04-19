@@ -4,42 +4,52 @@ import { BsFillPencilFill } from 'react-icons/bs';
 import styled from 'styled-components';
 import "../App.css";
 
-function Todolist({ displayTodos, setDisplayTodos, setEditTodo }) {
-	const handleCompleted = (id) => {
+type todoProps = {
+	id: string,
+	title: string,
+	completed: boolean,
+}
+
+type Props = {
+	displayTodos: todoProps[]
+	setDisplayTodos: (todos: todoProps[]) => void,
+	setEditTodo: React.Dispatch<React.SetStateAction<todoProps | undefined>>
+}
+const Todolist:React.FC<Props> = ({ displayTodos, setDisplayTodos, setEditTodo }) => {
+	const handleCompleted = (id: string) => {
 		setDisplayTodos(displayTodos.map(todo => {
 			if (todo.id === id) {
-				return {...todo, completed: !todo.completed}
+				return { ...todo, completed: !todo.completed }
 			}
 			return todo;
 		}))
 	}
 
-	const handleDelete = ({id}) => {
+	const handleDelete = (id: string) => {
 		setDisplayTodos(displayTodos.filter(todo => todo.id !== id));
 	}
 
-	const handleEdit = ({id}) => {
-		const findTodos = displayTodos.find(todo => todo.id === id);
+	const handleEdit = (id: string) => {
+		const findTodos: todoProps | undefined = displayTodos.find(todo => todo.id === id);
 		setEditTodo(findTodos);
 	}
-  return (
-	  <Container>
-		
-		<InputList>
-			{displayTodos.map((todo) => (	  
-			<List key={todo.id}>
-			<input type="checkbox" onClick= {() => handleCompleted(todo.id)}/>
-			<p className={todo.completed ? "completed" : ""}>{todo.title}</p>
-			<RiDeleteBinFill style={style} onClick={() => handleDelete(todo)} />
-			<BsFillPencilFill style={style} onClick={() => handleEdit(todo)} />
-			</List>
-		))}
-		</InputList>
-	</Container>
-  )
+	return (
+		<Container>
+			<InputList>
+				{displayTodos?.map((todo) => (
+					<List key={todo.id}>
+						<input type="checkbox" onClick={() => handleCompleted(todo.id)} />
+						<p className={todo.completed ? "completed" : ""}>{todo.title}</p>
+						<RiDeleteBinFill style={style} onClick={() => handleDelete(todo.id)} />
+						<BsFillPencilFill style={style} onClick={() => handleEdit(todo.id)} />
+					</List>
+				))}
+			</InputList>
+		</Container>
+	)
 }
 
-const style = {fontSize: "1.5rem", paddingRight: "10px", cursor: "pointer"}
+const style = { fontSize: "1.5rem", paddingRight: "10px", cursor: "pointer" }
 
 const Container = styled.div`
 	max-width: 450px;

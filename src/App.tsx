@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Todo from "./Components/Todo";
+import Todo, { todoProps } from "./Components/Todo";
 import styled from "styled-components";
 import Todolist from "./Components/Todolist";
 import Header from "./Components/Header";
@@ -7,10 +7,10 @@ import Quotes from "./Components/Quotes"
 import LazyLoad from "react-lazy-load";
 
 function App() {
-  const initialState = JSON.parse(localStorage.getItem("displayTodos")) || [];
-  const [inputTodos, setInputTodos] = useState("");
-  const [displayTodos, setDisplayTodos] = useState(initialState);
-  const [editTodo, setEditTodo] = useState(null);
+  const initialState = JSON.parse(localStorage.getItem("displayTodos") ?? "[]");
+  const [inputTodos, setInputTodos] = useState<string>("");
+  const [displayTodos, setDisplayTodos] = useState<any[]>(initialState);
+  const [editTodo, setEditTodo] = useState<todoProps | undefined>();
 
   useEffect(() => {
     localStorage.setItem("displayTodos", JSON.stringify(displayTodos))
@@ -18,26 +18,25 @@ function App() {
 
   return (
     <Container>
-        <Header />
+      <Header />
       <TodoContainer>
         <LazyLoad height={140}>
-        <Quotes />
+          <Quotes />
         </LazyLoad>
         <Todo
-        inputTodos={inputTodos}
-        setInputTodos={setInputTodos}
-        displayTodos={displayTodos}
-        setDisplayTodos={setDisplayTodos}
-        editTodo={editTodo}
-        setEditTodo={setEditTodo}
+          inputTodos={inputTodos}
+          setInputTodos={setInputTodos}
+          displayTodos={displayTodos}
+          setDisplayTodos={setDisplayTodos}
+          editTodo={editTodo}
+          setEditTodo={setEditTodo}
         />
         <Todolist
-        displayTodos={displayTodos} 
-        setDisplayTodos={setDisplayTodos}
-        editTodo={editTodo}
-        setEditTodo={setEditTodo}
+          displayTodos={displayTodos}
+          setDisplayTodos={setDisplayTodos}
+          setEditTodo={setEditTodo}
         />
-        </TodoContainer>
+      </TodoContainer>
     </Container>
   );
 }
